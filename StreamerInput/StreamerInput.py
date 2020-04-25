@@ -85,7 +85,7 @@ class IncomingInterface:
 
     def _generate_output_record_info(self) -> Sdk.RecordInfo:
         info: Sdk.RecordInfo = Sdk.RecordInfo(self.parent.alteryx_engine)
-        info.add_field("Prefix", Sdk.FieldType.v_wstring, 1073741823, 0, self.parent.label)
+        info.add_field("Source", Sdk.FieldType.v_wstring, 1073741823, 0, self.parent.label)
         info.add_field("Count", Sdk.FieldType.int64, 0, 0, self.parent.label)
         return info
 
@@ -99,7 +99,7 @@ class IncomingInterface:
                 await asyncio.sleep(wait)
                 count += 1
                 self.Creator.reset()
-                self.RecordInfo.get_field_by_name('Prefix').set_from_string(self.Creator, "Something")
+                self.RecordInfo.get_field_by_name('Source').set_from_string(self.Creator, self.parent.label)
                 self.RecordInfo.get_field_by_name('Count').set_from_int64(self.Creator, count)
                 data = self.Creator.finalize_record()
                 self.parent.Output.push_record(data)
