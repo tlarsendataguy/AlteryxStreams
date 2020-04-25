@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+<head>
+  <meta charset="utf-8">
+  <title>Streamer Input</title>
+
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend class='blueTitle'>XMSG("Streamer Input")</legend>
+      <div class=''>
+        <label>XMSG("Prefix:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Prefix', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Seconds between records:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Seconds', dataType: 'SimpleString'}"></ayx>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>
