@@ -1,5 +1,6 @@
 import collections
 import AlteryxPythonSDK as Sdk
+import incoming_interface as ii
 
 
 class AyxPlugin:
@@ -26,7 +27,7 @@ class AyxPlugin:
         self.Output = self.output_anchor_mgr.get_output_anchor('Output')
 
     def pi_add_incoming_connection(self, str_type: str, str_name: str) -> object:
-        return IncomingInterface(self, str_type)
+        return ii.IncomingInterface(self, str_type)
 
     def pi_add_outgoing_connection(self, str_name: str) -> bool:
         return True
@@ -42,6 +43,9 @@ class AyxPlugin:
 
     def display_info_msg(self, msg_string: str):
         self.alteryx_engine.output_message(self.n_tool_id, Sdk.EngineMessageType.info, msg_string)
+
+    def update_progress(self, percent):
+        self.alteryx_engine.output_tool_progress(self.n_tool_id, percent)
 
     def ii_init(self, record_info: Sdk.RecordInfo, connection: str):
         if connection == 'Left':
@@ -96,37 +100,3 @@ class AyxPlugin:
             source_index += 1
             dest_index += 1
         self.RightCopier.done_adding()
-
-
-class IncomingInterface:
-    def __init__(self, parent: AyxPlugin, connection: str):
-        # Default properties
-        self.parent: AyxPlugin = parent
-        self.connection: str = connection
-        self.copier: Sdk.RecordCopier = None
-        self.info: Sdk.RecordInfo = None
-
-    def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
-        self.copier = Sdk.RecordCopier(record_info_in, record_info_in)
-        for index in range(record_info_in.num_fields):
-            self.copier.add(index, index)
-        self.copier.done_adding()
-        self.info = record_info_in
-        self.parent.ii_init(record_info_in, self.connection)
-        return True
-
-    def ii_push_record(self, in_record: Sdk.RecordRef) -> bool:
-        # If we do not copy in_record here, this tool does not work.  The in_record reference becomes
-        # invalid after this method returns
-
-        creator = self.info.construct_record_creator()
-        self.copier.copy(creator, in_record)
-        self.parent.ii_push_record(creator, self.connection)
-        return True
-
-    def ii_update_progress(self, d_percent: float):
-        # Inform the Alteryx engine of the tool's progress.
-        self.parent.alteryx_engine.output_tool_progress(self.parent.n_tool_id, d_percent)
-
-    def ii_close(self):
-        return

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <AlteryxJavaScriptPlugin>
-  <EngineSettings EngineDll="Python" EngineDllEntryPoint="StreamerInput.py" SDKVersion="10.1" />
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\StreamerInput.py" SDKVersion="10.1" />
   <GuiSettings Html="StreamerInput.html" Icon="StreamerInput.png" Help="" SDKVersion="10.1">
     <InputConnections>
       <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
