@@ -12,7 +12,7 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Streamer (" + str(n_tool_id) + ")"
+        self.label = "Streamer Input (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.Output: Sdk.OutputAnchor = None

@@ -8,7 +8,7 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "StreamerStart (" + str(n_tool_id) + ")"
+        self.label = "Streamer Start (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.loop = asyncio.get_event_loop()
