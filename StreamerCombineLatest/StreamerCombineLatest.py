@@ -8,7 +8,7 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Streamer Zip (" + str(n_tool_id) + ")"
+        self.label = "Streamer CombineLatest (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.Output: Sdk.OutputAnchor = None
@@ -18,8 +18,8 @@ class AyxPlugin:
         self.Creator: Sdk.RecordCreator = None
         self.LeftCopier: Sdk.RecordCopier = None
         self.RightCopier: Sdk.RecordCopier = None
-        self.LeftRecords = collections.deque()
-        self.RightRecords = collections.deque()
+        self.LeftRecord: Sdk.RecordCreator = None
+        self.RightRecord: Sdk.RecordCreator = None
 
     def pi_init(self, str_xml: str):
         # Getting the output anchor from Config.xml by the output connection name
@@ -54,18 +54,16 @@ class AyxPlugin:
 
     def ii_push_record(self, record: Sdk.RecordCreator, connection: str):
         if connection == 'Left':
-            self.LeftRecords.append(record)
+            self.LeftRecord = record
         else:
-            self.RightRecords.append(record)
+            self.RightRecord = record
 
-        if len(self.LeftRecords) == 0 or len(self.RightRecords) == 0:
+        if self.LeftRecord is None or self.RightRecord is None:
             return
 
-        left_record = self.LeftRecords.popleft()
-        right_record = self.RightRecords.popleft()
         self.Creator.reset()
-        self.LeftCopier.copy(self.Creator, left_record.finalize_record())
-        self.RightCopier.copy(self.Creator, right_record.finalize_record())
+        self.LeftCopier.copy(self.Creator, self.LeftRecord.finalize_record())
+        self.RightCopier.copy(self.Creator, self.RightRecord.finalize_record())
         output = self.Creator.finalize_record()
         self.Output.push_record(output)
 

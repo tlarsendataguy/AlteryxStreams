@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <AlteryxJavaScriptPlugin>
-  <EngineSettings EngineDll="Python" EngineDllEntryPoint="StreamerInput.py" SDKVersion="10.1" />
-  <GuiSettings Html="StreamerInput.html" Icon="StreamerInput.png" Help="" SDKVersion="10.1">
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="StreamerCombineLatest.py" SDKVersion="10.1" />
+  <GuiSettings Html="StreamerCombineLatest.html" Icon="StreamerCombineLatest.png" Help="" SDKVersion="10.1">
     <InputConnections>
-      <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
+      <Connection Name="Left" AllowMultiple="False" Optional="False" Type="Connection" Label="L"/>
+      <Connection Name="Right" AllowMultiple="False" Optional="False" Type="Connection" Label="R"/>
     </InputConnections>
     <OutputConnections>
       <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
@@ -11,8 +12,8 @@
   </GuiSettings>
   <Properties>
     <MetaInfo>
-      <Name>Streamer Input</Name>
-      <Description>Input a stream of data</Description>
+      <Name>Streamer Combine Latest</Name>
+      <Description>Combine two streams, emitting whenever either of the source streams emits</Description>
       <CategoryName>Streamer</CategoryName>
       <SearchTags>python, sdk</SearchTags>
       <ToolVersion>1.00</ToolVersion>
