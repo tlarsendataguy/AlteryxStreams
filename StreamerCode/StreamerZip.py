@@ -1,6 +1,7 @@
 import collections
 import AlteryxPythonSDK as Sdk
 import incoming_interface as ii
+import init_left_right_info as init
 
 
 class AyxPlugin:
@@ -52,8 +53,8 @@ class AyxPlugin:
             self.LeftRecordInfo = record_info
         else:
             self.RightRecordInfo = record_info
-        if self._can_init_info():
-            self._init_info()
+        if init.can(self):
+            init.info(self)
         return
 
     def ii_push_record(self, record: Sdk.RecordCreator, connection: str):
@@ -72,31 +73,3 @@ class AyxPlugin:
         self.RightCopier.copy(self.Creator, right_record.finalize_record())
         output = self.Creator.finalize_record()
         self.Output.push_record(output)
-
-    def _can_init_info(self) -> bool:
-        return self.LeftRecordInfo is not None and self.RightRecordInfo is not None
-
-    def _init_info(self):
-        self.RecordInfo = Sdk.RecordInfo(self.alteryx_engine)
-        for field in self.LeftRecordInfo:
-            self.RecordInfo.add_field(field)
-        for field in self.RightRecordInfo:
-            self.RecordInfo.add_field(field)
-        self.Output.init(self.RecordInfo)
-        self.Creator = self.RecordInfo.construct_record_creator()
-        self.LeftCopier = Sdk.RecordCopier(self.RecordInfo, self.LeftRecordInfo)
-        source_index = 0
-        dest_index = 0
-        for _ in self.LeftRecordInfo:
-            self.LeftCopier.add(dest_index, source_index)
-            source_index += 1
-            dest_index += 1
-        self.LeftCopier.done_adding()
-
-        self.RightCopier = Sdk.RecordCopier(self.RecordInfo, self.RightRecordInfo)
-        source_index = 0
-        for _ in self.RightRecordInfo:
-            self.RightCopier.add(dest_index, source_index)
-            source_index += 1
-            dest_index += 1
-        self.RightCopier.done_adding()
