@@ -1,6 +1,4 @@
-import random
 import threading
-
 import AlteryxPythonSDK as Sdk
 import xml.etree.ElementTree as Et
 import asyncio
@@ -12,12 +10,17 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Streamer Input (" + str(n_tool_id) + ")"
+        self.label = "Interval (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.Output: Sdk.OutputAnchor = None
+        self.Seconds: int = 0
 
     def pi_init(self, str_xml: str):
+        self.Seconds = int(Et.fromstring(str_xml).find("Seconds").text) if 'Seconds' in str_xml else 0
+        if self.Seconds <= 0:
+            self.display_error_msg('Seconds between records must be a positive, non-zero number')
+
         # Getting the output anchor from Config.xml by the output connection name
         self.Output = self.output_anchor_mgr.get_output_anchor('Output')
 
@@ -85,21 +88,17 @@ class IncomingInterface:
 
     def _generate_output_record_info(self) -> Sdk.RecordInfo:
         info: Sdk.RecordInfo = Sdk.RecordInfo(self.parent.alteryx_engine)
-        info.add_field("Source", Sdk.FieldType.v_wstring, 1073741823, 0, self.parent.label)
         info.add_field("Count", Sdk.FieldType.int64, 0, 0, self.parent.label)
         return info
 
     async def _asyncPush(self):
         count: int = 0
-        wait: int = random.randint(1, 5)
-        self.parent.display_info_msg("will wait for " + str(wait) + " seconds")
 
         try:
             while True:
-                await asyncio.sleep(wait)
+                await asyncio.sleep(self.parent.Seconds)
                 count += 1
                 self.Creator.reset()
-                self.RecordInfo.get_field_by_name('Source').set_from_string(self.Creator, self.parent.label)
                 self.RecordInfo.get_field_by_name('Count').set_from_int64(self.Creator, count)
                 data = self.Creator.finalize_record()
                 self.parent.Output.push_record(data)

@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <AlteryxJavaScriptPlugin>
-  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\StreamerInput.py" SDKVersion="10.1" />
-  <GuiSettings Html="StreamerInput.html" Icon="StreamerInput.png" Help="" SDKVersion="10.1">
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\controller.py" SDKVersion="10.1" />
+  <GuiSettings Html="StreamerController.html" Icon="StreamerController.png" Help="" SDKVersion="10.1">
     <InputConnections>
-      <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
     </InputConnections>
     <OutputConnections>
       <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
@@ -11,8 +10,8 @@
   </GuiSettings>
   <Properties>
     <MetaInfo>
-      <Name>Streamer Input</Name>
-      <Description>Input a stream of data</Description>
+      <Name>Controller</Name>
+      <Description>The starting point for streams.  Connect input streams tools to a single controller.</Description>
       <CategoryName>Streamer</CategoryName>
       <SearchTags>python, sdk</SearchTags>
       <ToolVersion>1.00</ToolVersion>

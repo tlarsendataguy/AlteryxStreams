@@ -9,7 +9,7 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Streamer CombineLatest (" + str(n_tool_id) + ")"
+        self.label = "Combine Latest (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.Output: Sdk.OutputAnchor = None

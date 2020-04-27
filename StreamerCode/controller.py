@@ -1,5 +1,6 @@
 import AlteryxPythonSDK as Sdk
 import asyncio
+import xml.etree.ElementTree as Et
 
 
 class AyxPlugin:
@@ -8,7 +9,7 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Streamer Start (" + str(n_tool_id) + ")"
+        self.label = "Controller (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.loop = asyncio.get_event_loop()
@@ -16,8 +17,13 @@ class AyxPlugin:
         self.Info: Sdk.RecordInfo = None
         self.Creator: Sdk.RecordCreator = None
         self.Loop = None
+        self.Seconds: int = 0
 
     def pi_init(self, str_xml: str):
+        self.Seconds = int(Et.fromstring(str_xml).find("Seconds").text) if 'Seconds' in str_xml else 0
+        if self.Seconds <= 0:
+            self.display_error_msg('Stream lifetime must be a positive, non-zero number')
+
         # Getting the output anchor from Config.xml by the output connection name
         self.Output = self.output_anchor_mgr.get_output_anchor('Output')
 
@@ -67,9 +73,8 @@ class AyxPlugin:
         data = self.Creator.finalize_record()
         self.Output.push_record(data)
 
-    @staticmethod
-    async def _wait_for_close():
-        await asyncio.sleep(30)
+    async def _wait_for_close(self):
+        await asyncio.sleep(self.Seconds)
         return
         try:
             while True:
