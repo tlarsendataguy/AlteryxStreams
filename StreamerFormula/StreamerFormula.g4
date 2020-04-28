@@ -32,9 +32,10 @@ expr
       'ENDIF'                                                        # elseIf
     | Integer                                                        # integer
     | Decimal                                                        # decimal
-    | string                                                         # stringLiteral
+    | Datetime                                                       # datetimeLiteral
     | Date                                                           # dateLiteral
     | Field                                                          # field
+    | string                                                         # stringLiteral
     ;
 
 function
@@ -50,7 +51,10 @@ string
 
 Integer          : '-'?[0-9]+ ;
 Decimal          : '-'?[0-9]*'.'[0-9]+ ;
-Date             : [0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9] ;
+Date             : ['][0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9] [']
+                 | '"'[0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9]'"';
+Datetime         : ['][0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9]' '[0-9][0-9]':'[0-9][0-9]':'[0-9][0-9][']
+                 | '"'[0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9]' '[0-9][0-9]':'[0-9][0-9]':'[0-9][0-9]'"';
 Field            : '[' ~(']')+ ']' ;
 SingleQuoteString: ['] ~(['])* ['] ;
 DoubleQuoteString: '"' ~('"')* '"' ;

@@ -54,6 +54,11 @@ class StreamerFormulaVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StreamerFormulaParser#datetimeLiteral.
+    def visitDatetimeLiteral(self, ctx:StreamerFormulaParser.DatetimeLiteralContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StreamerFormulaParser#func.
     def visitFunc(self, ctx:StreamerFormulaParser.FuncContext):
         return self.visitChildren(ctx)

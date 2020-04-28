@@ -1,24 +1,39 @@
+import datetime
+
 from antlr4 import *
 from StreamerFormulaParser import StreamerFormulaParser
 from StreamerFormulaLexer import StreamerFormulaLexer
 from typing import Callable, Dict
 
 
+class MissingFieldException(Exception):
+    def __init__(self, missing_field: str):
+        self.MissingField = missing_field
+
+
+def calculate(expression: str, fields=None):
+    if fields is None:
+        fields = {}
+    visitor = FormulaVisitor(expression, fields)
+    return visitor.calculate()
+
+
 class FormulaVisitor(ParseTreeVisitor):
-    def __init__(self, fields: Dict[str, Callable]):
+    def __init__(self, expression: str, fields: Dict[str, Callable]):
+        self.Expression = expression
         self.Fields = fields
+        lexer = StreamerFormulaLexer(InputStream(expression))
+        stream = CommonTokenStream(lexer)
+        parser = StreamerFormulaParser(stream)
+        self._tree = parser.formula()
 
     def _left_right_check(self, ctx, operator):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
         return operator(left, right)
 
-    def calculate(self, expression: str):
-        lexer = StreamerFormulaLexer(InputStream(expression))
-        stream = CommonTokenStream(lexer)
-        parser = StreamerFormulaParser(stream)
-        tree = parser.formula()
-        return self.visit(tree)
+    def calculate(self):
+        return self.visit(self._tree)
 
     def visitFormula(self, ctx: StreamerFormulaParser.FormulaContext):
         return self.visitChildren(ctx)
@@ -53,26 +68,44 @@ class FormulaVisitor(ParseTreeVisitor):
     def visitEqual(self, ctx: StreamerFormulaParser.EqualContext):
         return self._left_right_check(ctx, lambda l, r: l == r)
 
-    def visitFunc(self, ctx: StreamerFormulaParser.FuncContext):
-        return self.visitChildren(ctx)
-
     def visitField(self, ctx: StreamerFormulaParser.FieldContext):
-        return self.visitChildren(ctx)
+        field_name = ctx.getText()[1:-1]
+        value_getter = self.Fields.get(field_name)
+        if value_getter is None:
+            raise MissingFieldException(missing_field=field_name)
+        return value_getter()
 
     def visitStringLiteral(self, ctx: StreamerFormulaParser.StringLiteralContext):
-        return self.visitChildren(ctx)
+        return ctx.getText()[1:-1]
 
     def visitAnd(self, ctx: StreamerFormulaParser.AndContext):
         return self._left_right_check(ctx, lambda l, r: l and r)
 
     def visitElseIf(self, ctx: StreamerFormulaParser.ElseIfContext):
-        return self.visitChildren(ctx)
+        condition = self.visit(ctx.expr(0))
+        if condition:
+            return self.visit(ctx.expr(1))
+
+        elseifs = (len(ctx.expr())-3) / 2
+        elseif = 0
+        while elseif < elseifs:
+            start_index = (elseif * 2) + 2
+            condition = self.visit(ctx.expr(start_index))
+            if condition:
+                return self.visit(ctx.expr(start_index + 1))
+            elseif += 1
+
+        else_expr = len(ctx.expr())-1
+        return self.visit(ctx.expr(else_expr))
 
     def visitLessThan(self, ctx: StreamerFormulaParser.LessThanContext):
         return self._left_right_check(ctx, lambda l, r: l < r)
 
     def visitDateLiteral(self, ctx: StreamerFormulaParser.DateLiteralContext):
-        return self.visitChildren(ctx)
+        return datetime.datetime.strptime(ctx.getText()[1:-1], "%Y-%m-%d")
+
+    def visitDatetimeLiteral(self, ctx: StreamerFormulaParser.DatetimeLiteralContext):
+        return datetime.datetime.strptime(ctx.getText()[1:-1], "%Y-%m-%d %H:%M:%S")
 
     def visitDivide(self, ctx: StreamerFormulaParser.DivideContext):
         return self._left_right_check(ctx, lambda l, r: l / r)
@@ -93,25 +126,40 @@ class FormulaVisitor(ParseTreeVisitor):
         return self._left_right_check(ctx, lambda l, r: l <= r)
 
     def visitDecimal(self, ctx: StreamerFormulaParser.DecimalContext):
-        return self.visitChildren(ctx)
+        return float(ctx.getText())
 
     def visitMultiply(self, ctx: StreamerFormulaParser.MultiplyContext):
         return self._left_right_check(ctx, lambda l, r: l * r)
 
     def visitIf(self, ctx: StreamerFormulaParser.IfContext):
-        return self.visitChildren(ctx)
+        condition = self.visit(ctx.expr(0))
+        if condition:
+            return self.visit(ctx.expr(1))
+        else:
+            return self.visit(ctx.expr(2))
 
     def visitGreaterThan(self, ctx: StreamerFormulaParser.GreaterThanContext):
         return self._left_right_check(ctx, lambda l, r: l > r)
 
     def visitPow(self, ctx: StreamerFormulaParser.PowContext):
-        return self.visitChildren(ctx)
+        return pow(self.visit(ctx.expr(0)), self.visit(ctx.expr(1)))
 
     def visitMin(self, ctx: StreamerFormulaParser.MinContext):
-        return self.visitChildren(ctx)
+        min_value = self.visit(ctx.expr(0))
+        index = 1
+        while index < len(ctx.expr()):
+            compare_to = self.visit(ctx.expr(index))
+            if compare_to < min_value:
+                min_value = compare_to
+            index += 1
+        return min_value
 
     def visitMax(self, ctx: StreamerFormulaParser.MaxContext):
-        return self.visitChildren(ctx)
-
-    def visitString(self, ctx: StreamerFormulaParser.StringContext):
-        return self.visitChildren(ctx)
+        max_value = self.visit(ctx.expr(0))
+        index = 1
+        while index < len(ctx.expr()):
+            compare_to = self.visit(ctx.expr(index))
+            if compare_to > max_value:
+                max_value = compare_to
+            index += 1
+        return max_value

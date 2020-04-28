@@ -89,6 +89,15 @@ class StreamerFormulaListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by StreamerFormulaParser#datetimeLiteral.
+    def enterDatetimeLiteral(self, ctx:StreamerFormulaParser.DatetimeLiteralContext):
+        pass
+
+    # Exit a parse tree produced by StreamerFormulaParser#datetimeLiteral.
+    def exitDatetimeLiteral(self, ctx:StreamerFormulaParser.DatetimeLiteralContext):
+        pass
+
+
     # Enter a parse tree produced by StreamerFormulaParser#func.
     def enterFunc(self, ctx:StreamerFormulaParser.FuncContext):
         pass
