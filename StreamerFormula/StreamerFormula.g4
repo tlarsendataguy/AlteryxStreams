@@ -5,44 +5,42 @@ formula
     ;
 
 expr
-    : function                                            # func
-    | expr '+' expr                                       # add
-    | expr '-' expr                                       # subtract
-    | expr '*' expr                                       # multiply
-    | expr '/' expr                                       # divide
-    | expr ('AND'|'&&') expr                              # and
-    | expr ('OR'|'||') expr                               # or
-    | expr '=' expr                                       # equal
-    | expr '>' expr                                       # greaterThan
-    | expr '>=' expr                                      # greaterEqual
-    | expr '<' expr                                       # lessThan
-    | expr '<=' expr                                      # lessEqual
-    | expr '!=' expr                                      # notEqual
-    | expr 'IN' parens                                    # in
-    | expr 'NOT IN' parens                                # notIn
-    | 'IF' expr 'THEN' expr 'ELSE' expr 'ENDIF'           # if
-    | 'IF' expr 'THEN' expr
-      ('ELSEIF' expr 'THEN' expr)+ 'ELSE' expr 'ENDIF'    #elseIf
-    | parens                                              # parenthesis
-    | number                                              # numberLiteral
-    | string                                              # stringLiteral
-    | Date                                                # dateLiteral
-    | Field                                               # field
+    : '(' expr ')'                                                   # parenthesis
+    | left=expr '*' right=expr                                       # multiply
+    | left=expr '/' right=expr                                       # divide
+    | left=expr '+' right=expr                                       # add
+    | left=expr '-' right=expr                                       # subtract
+    | left=expr '=' right=expr                                       # equal
+    | left=expr '>' right=expr                                       # greaterThan
+    | left=expr '>=' right=expr                                      # greaterEqual
+    | left=expr '<' right=expr                                       # lessThan
+    | left=expr '<=' right=expr                                      # lessEqual
+    | left=expr '!=' right=expr                                      # notEqual
+    | expr 'IN' '(' (expr (',' expr)*)? ')'                          # in
+    | expr 'NOT IN' '(' (expr (',' expr)*)? ')'                      # notIn
+    | left=expr ('AND'|'&&') right=expr                              # and
+    | left=expr ('OR'|'||') right=expr                               # or
+    | function                                                       # func
+    | 'IF'   expr
+      'THEN' expr
+      'ELSE' expr
+      'ENDIF'                                                        # if
+    | 'IF'      expr
+      'THEN'    expr
+      ('ELSEIF' expr 'THEN' expr)+
+      'ELSE' expr
+      'ENDIF'                                                        # elseIf
+    | Integer                                                        # integer
+    | Decimal                                                        # decimal
+    | string                                                         # stringLiteral
+    | Date                                                           # dateLiteral
+    | Field                                                          # field
     ;
 
 function
-    :  'POW(' expr ',' expr ')'    # pow
-    |  'Min(' expr (',' expr)+ ')' # min
-    |  'Max(' expr (',' expr)+ ')' # max
-    ;
-
-parens
-    : '(' expr ')'
-    ;
-
-number
-    : Integer
-    | Decimal
+    : 'POW(' expr ',' expr ')'    # pow
+    | 'Min(' expr (',' expr)+ ')' # min
+    | 'Max(' expr (',' expr)+ ')' # max
     ;
 
 string
