@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<AlteryxJavaScriptPlugin>
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\calc_test.py" SDKVersion="10.1" />
+  <GuiSettings Html="StreamerCalcTest.html" Icon="StreamerCalcTest.png" Help="" SDKVersion="10.1">
+    <InputConnections>
+      <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
+    </InputConnections>
+    <OutputConnections>
+      <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
+    </OutputConnections>
+  </GuiSettings>
+  <Properties>
+    <MetaInfo>
+      <Name>Calc Test</Name>
+      <Description>Test the custom formulas supported by the ANLTR4 parser</Description>
+      <CategoryName>Streamer</CategoryName>
+      <SearchTags>python, sdk</SearchTags>
+      <ToolVersion>1.00</ToolVersion>
+      <Author>tlarsendataguy</Author>
+      <Company></Company>
+      <Copyright>2020</Copyright>
+    </MetaInfo>
+  </Properties>
+</AlteryxJavaScriptPlugin>
