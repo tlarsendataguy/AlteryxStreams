@@ -9,3 +9,4 @@ mklink /D %streamerdir%\StreamerCombineLatest %CD%\StreamerCombineLatest
 mklink /D %streamerdir%\StreamerCode %CD%\StreamerCode
 mklink /D %streamerdir%\StreamerRace %CD%\StreamerRace
 mklink /D %streamerdir%\StreamerCalcTest %CD%\StreamerCalcTest
+mklink /D %streamerdir%\StreamerSample %CD%\StreamerSample
