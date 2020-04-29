@@ -12,3 +12,4 @@ mklink /D %streamerdir%\StreamerCalcTest %CD%\StreamerCalcTest
 mklink /D %streamerdir%\StreamerSample %CD%\StreamerSample
 mklink /D %streamerdir%\StreamerTimeInterval %CD%\StreamerTimeInterval
 mklink /D %streamerdir%\StreamerScan %CD%\StreamerScan
+mklink /D %streamerdir%\StreamerReduce %CD%\StreamerReduce
