@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+<head>
+  <meta charset="utf-8">
+  <title>Scan</title>
+
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend class='blueTitle'>XMSG("Scan")</legend>
+      <div class=''>
+        <label>XMSG("New Field Name:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'FieldName', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Data Type:")</label>
+		<ayx data-ui-props="{type: 'DropDown'}" data-item-props="{dataName: 'DataType', dataType: 'StringSelector', optionList: [{value: 'String', label: 'String'},{value: 'Integer', label: 'Integer'},{value: 'Decimal', label: 'Decimal'},{value: 'Date', label: 'Date'},{value: 'Datetime', label: 'Datetime'}]}"></ayx>
+        <label>XMSG("Formula:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Formula', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Initial Value:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'InitialValue', dataType: 'SimpleString'}"></ayx>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>

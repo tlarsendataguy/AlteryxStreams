@@ -42,14 +42,19 @@ class FormulaVisitorTests(unittest.TestCase):
         self.assertEqual(0, calculate('Min(4,8,2,4,6,0,3)'))
         self.assertEqual(8, calculate('Max(4,8,2,4,6,0,3)'))
         self.assertRaises(Exception, lambda: calculate('2 * (1 + 3'))
+        self.assertEqual("ab", calculate("'a' + 'b'"))
+        self.assertEqual("", calculate("''"))
+        self.assertIsInstance(calculate("''"), str)
 
     def test_field_expressions(self):
         fields = {
-            'field1': lambda: 10
+            'field1': lambda: 10,
+            'field2': lambda: 'a',
+            'field3': lambda: 'b'
         }
         expression = '[field1]'
-        visitor = FormulaVisitor(expression=expression, fields=fields)
-        self.assertEqual(10, visitor.calculate())
+        self.assertEqual(10, calculate('[field1]', fields))
+        self.assertEqual('ab', calculate('[field2] + [field3]', fields))
 
     def test_field_expressions_invalid_syntax(self):
         fields = {
