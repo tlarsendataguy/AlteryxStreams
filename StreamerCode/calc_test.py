@@ -71,8 +71,12 @@ class IncomingInterface:
             index += 1
         self.Copier.done_adding()
         self.parent.Output.init(self.Info)
-        self.Visitor = FormulaVisitor(expression=self.parent.Formula, fields=self.Fields)
-        return True
+        try:
+            self.Visitor = FormulaVisitor(expression=self.parent.Formula, fields=self.Fields)
+            return True
+        except Exception as ex:
+            self.parent.display_error_msg(str(ex))
+            return False
 
     def ii_push_record(self, in_record: Sdk.RecordRef) -> bool:
         self.Record = in_record
@@ -83,9 +87,10 @@ class IncomingInterface:
             self.Info.get_field_by_name('Calc').set_from_int64(self.Creator, result)
             data = self.Creator.finalize_record()
             self.parent.Output.push_record(data)
+            return True
         except Exception as ex:
             self.parent.display_error_msg(str(ex))
-        return True
+            return False
 
     def ii_update_progress(self, d_percent: float):
         # Inform the Alteryx engine of the tool's progress.

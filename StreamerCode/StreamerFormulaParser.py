@@ -12,62 +12,64 @@ else:
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%")
-        buf.write("\u0097\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\3\3\3")
+        buf.write("\u009b\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\3\3\3")
         buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3")
         buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\6\3$\n\3\r\3\16\3%\3\3")
-        buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\62\n\3\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5")
+        buf.write("\3\66\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3")
         buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3")
         buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3")
-        buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3")
-        buf.write("\7\3^\n\3\f\3\16\3a\13\3\5\3c\n\3\3\3\3\3\3\3\3\3\3\3")
-        buf.write("\3\3\3\3\7\3l\n\3\f\3\16\3o\13\3\5\3q\n\3\3\3\7\3t\n\3")
-        buf.write("\f\3\16\3w\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3")
-        buf.write("\4\6\4\u0083\n\4\r\4\16\4\u0084\3\4\3\4\3\4\3\4\3\4\3")
-        buf.write("\4\6\4\u008d\n\4\r\4\16\4\u008e\3\4\3\4\5\4\u0093\n\4")
-        buf.write("\3\5\3\5\3\5\2\3\4\6\2\4\6\b\2\5\3\2\22\23\3\2\24\25\3")
-        buf.write("\2#$\2\u00b2\2\n\3\2\2\2\4\61\3\2\2\2\6\u0092\3\2\2\2")
-        buf.write("\b\u0094\3\2\2\2\n\13\5\4\3\2\13\3\3\2\2\2\f\r\b\3\1\2")
-        buf.write("\r\16\7\3\2\2\16\17\5\4\3\2\17\20\7\4\2\2\20\62\3\2\2")
-        buf.write("\2\21\62\5\6\4\2\22\23\7\26\2\2\23\24\5\4\3\2\24\25\7")
-        buf.write("\27\2\2\25\26\5\4\3\2\26\27\7\30\2\2\27\30\5\4\3\2\30")
-        buf.write("\31\7\31\2\2\31\62\3\2\2\2\32\33\7\26\2\2\33\34\5\4\3")
-        buf.write("\2\34\35\7\27\2\2\35#\5\4\3\2\36\37\7\32\2\2\37 \5\4\3")
-        buf.write("\2 !\7\27\2\2!\"\5\4\3\2\"$\3\2\2\2#\36\3\2\2\2$%\3\2")
-        buf.write("\2\2%#\3\2\2\2%&\3\2\2\2&\'\3\2\2\2\'(\7\30\2\2()\5\4")
-        buf.write("\3\2)*\7\31\2\2*\62\3\2\2\2+\62\7\36\2\2,\62\7\37\2\2")
-        buf.write("-\62\7!\2\2.\62\7 \2\2/\62\7\"\2\2\60\62\5\b\5\2\61\f")
-        buf.write("\3\2\2\2\61\21\3\2\2\2\61\22\3\2\2\2\61\32\3\2\2\2\61")
-        buf.write("+\3\2\2\2\61,\3\2\2\2\61-\3\2\2\2\61.\3\2\2\2\61/\3\2")
-        buf.write("\2\2\61\60\3\2\2\2\62u\3\2\2\2\63\64\f\31\2\2\64\65\7")
-        buf.write("\5\2\2\65t\5\4\3\32\66\67\f\30\2\2\678\7\6\2\28t\5\4\3")
-        buf.write("\319:\f\27\2\2:;\7\7\2\2;t\5\4\3\30<=\f\26\2\2=>\7\b\2")
-        buf.write("\2>t\5\4\3\27?@\f\25\2\2@A\7\t\2\2At\5\4\3\26BC\f\24\2")
-        buf.write("\2CD\7\n\2\2Dt\5\4\3\25EF\f\23\2\2FG\7\13\2\2Gt\5\4\3")
-        buf.write("\24HI\f\22\2\2IJ\7\f\2\2Jt\5\4\3\23KL\f\21\2\2LM\7\r\2")
-        buf.write("\2Mt\5\4\3\22NO\f\20\2\2OP\7\16\2\2Pt\5\4\3\21QR\f\r\2")
-        buf.write("\2RS\t\2\2\2St\5\4\3\16TU\f\f\2\2UV\t\3\2\2Vt\5\4\3\r")
-        buf.write("WX\f\17\2\2XY\7\17\2\2Yb\7\3\2\2Z_\5\4\3\2[\\\7\20\2\2")
-        buf.write("\\^\5\4\3\2][\3\2\2\2^a\3\2\2\2_]\3\2\2\2_`\3\2\2\2`c")
-        buf.write("\3\2\2\2a_\3\2\2\2bZ\3\2\2\2bc\3\2\2\2cd\3\2\2\2dt\7\4")
-        buf.write("\2\2ef\f\16\2\2fg\7\21\2\2gp\7\3\2\2hm\5\4\3\2ij\7\20")
-        buf.write("\2\2jl\5\4\3\2ki\3\2\2\2lo\3\2\2\2mk\3\2\2\2mn\3\2\2\2")
-        buf.write("nq\3\2\2\2om\3\2\2\2ph\3\2\2\2pq\3\2\2\2qr\3\2\2\2rt\7")
-        buf.write("\4\2\2s\63\3\2\2\2s\66\3\2\2\2s9\3\2\2\2s<\3\2\2\2s?\3")
-        buf.write("\2\2\2sB\3\2\2\2sE\3\2\2\2sH\3\2\2\2sK\3\2\2\2sN\3\2\2")
-        buf.write("\2sQ\3\2\2\2sT\3\2\2\2sW\3\2\2\2se\3\2\2\2tw\3\2\2\2u")
-        buf.write("s\3\2\2\2uv\3\2\2\2v\5\3\2\2\2wu\3\2\2\2xy\7\33\2\2yz")
-        buf.write("\5\4\3\2z{\7\20\2\2{|\5\4\3\2|}\7\4\2\2}\u0093\3\2\2\2")
-        buf.write("~\177\7\34\2\2\177\u0082\5\4\3\2\u0080\u0081\7\20\2\2")
-        buf.write("\u0081\u0083\5\4\3\2\u0082\u0080\3\2\2\2\u0083\u0084\3")
-        buf.write("\2\2\2\u0084\u0082\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0086")
-        buf.write("\3\2\2\2\u0086\u0087\7\4\2\2\u0087\u0093\3\2\2\2\u0088")
-        buf.write("\u0089\7\35\2\2\u0089\u008c\5\4\3\2\u008a\u008b\7\20\2")
-        buf.write("\2\u008b\u008d\5\4\3\2\u008c\u008a\3\2\2\2\u008d\u008e")
-        buf.write("\3\2\2\2\u008e\u008c\3\2\2\2\u008e\u008f\3\2\2\2\u008f")
-        buf.write("\u0090\3\2\2\2\u0090\u0091\7\4\2\2\u0091\u0093\3\2\2\2")
-        buf.write("\u0092x\3\2\2\2\u0092~\3\2\2\2\u0092\u0088\3\2\2\2\u0093")
-        buf.write("\7\3\2\2\2\u0094\u0095\t\4\2\2\u0095\t\3\2\2\2\r%\61_")
-        buf.write("bmpsu\u0084\u008e\u0092")
+        buf.write("\3\3\3\3\3\3\3\3\7\3b\n\3\f\3\16\3e\13\3\5\3g\n\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\7\3p\n\3\f\3\16\3s\13\3\5\3u")
+        buf.write("\n\3\3\3\7\3x\n\3\f\3\16\3{\13\3\3\4\3\4\3\4\3\4\3\4\3")
+        buf.write("\4\3\4\3\4\3\4\3\4\6\4\u0087\n\4\r\4\16\4\u0088\3\4\3")
+        buf.write("\4\3\4\3\4\3\4\3\4\6\4\u0091\n\4\r\4\16\4\u0092\3\4\3")
+        buf.write("\4\5\4\u0097\n\4\3\5\3\5\3\5\2\3\4\6\2\4\6\b\2\5\3\2\22")
+        buf.write("\23\3\2\24\25\3\2#$\2\u00b8\2\n\3\2\2\2\4\65\3\2\2\2\6")
+        buf.write("\u0096\3\2\2\2\b\u0098\3\2\2\2\n\13\5\4\3\2\13\3\3\2\2")
+        buf.write("\2\f\r\b\3\1\2\r\16\7\3\2\2\16\17\5\4\3\2\17\20\7\4\2")
+        buf.write("\2\20\66\3\2\2\2\21\66\5\6\4\2\22\23\7\26\2\2\23\24\5")
+        buf.write("\4\3\2\24\25\7\27\2\2\25\26\5\4\3\2\26\27\7\30\2\2\27")
+        buf.write("\30\5\4\3\2\30\31\7\31\2\2\31\66\3\2\2\2\32\33\7\26\2")
+        buf.write("\2\33\34\5\4\3\2\34\35\7\27\2\2\35#\5\4\3\2\36\37\7\32")
+        buf.write("\2\2\37 \5\4\3\2 !\7\27\2\2!\"\5\4\3\2\"$\3\2\2\2#\36")
+        buf.write("\3\2\2\2$%\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\'\3\2\2\2\'(\7")
+        buf.write("\30\2\2()\5\4\3\2)*\7\31\2\2*\66\3\2\2\2+\66\7\36\2\2")
+        buf.write(",-\7\b\2\2-\66\7\36\2\2.\66\7\37\2\2/\60\7\b\2\2\60\66")
+        buf.write("\7\37\2\2\61\66\7!\2\2\62\66\7 \2\2\63\66\7\"\2\2\64\66")
+        buf.write("\5\b\5\2\65\f\3\2\2\2\65\21\3\2\2\2\65\22\3\2\2\2\65\32")
+        buf.write("\3\2\2\2\65+\3\2\2\2\65,\3\2\2\2\65.\3\2\2\2\65/\3\2\2")
+        buf.write("\2\65\61\3\2\2\2\65\62\3\2\2\2\65\63\3\2\2\2\65\64\3\2")
+        buf.write("\2\2\66y\3\2\2\2\678\f\33\2\289\7\5\2\29x\5\4\3\34:;\f")
+        buf.write("\32\2\2;<\7\6\2\2<x\5\4\3\33=>\f\31\2\2>?\7\7\2\2?x\5")
+        buf.write("\4\3\32@A\f\30\2\2AB\7\b\2\2Bx\5\4\3\31CD\f\27\2\2DE\7")
+        buf.write("\t\2\2Ex\5\4\3\30FG\f\26\2\2GH\7\n\2\2Hx\5\4\3\27IJ\f")
+        buf.write("\25\2\2JK\7\13\2\2Kx\5\4\3\26LM\f\24\2\2MN\7\f\2\2Nx\5")
+        buf.write("\4\3\25OP\f\23\2\2PQ\7\r\2\2Qx\5\4\3\24RS\f\22\2\2ST\7")
+        buf.write("\16\2\2Tx\5\4\3\23UV\f\17\2\2VW\t\2\2\2Wx\5\4\3\20XY\f")
+        buf.write("\16\2\2YZ\t\3\2\2Zx\5\4\3\17[\\\f\21\2\2\\]\7\17\2\2]")
+        buf.write("f\7\3\2\2^c\5\4\3\2_`\7\20\2\2`b\5\4\3\2a_\3\2\2\2be\3")
+        buf.write("\2\2\2ca\3\2\2\2cd\3\2\2\2dg\3\2\2\2ec\3\2\2\2f^\3\2\2")
+        buf.write("\2fg\3\2\2\2gh\3\2\2\2hx\7\4\2\2ij\f\20\2\2jk\7\21\2\2")
+        buf.write("kt\7\3\2\2lq\5\4\3\2mn\7\20\2\2np\5\4\3\2om\3\2\2\2ps")
+        buf.write("\3\2\2\2qo\3\2\2\2qr\3\2\2\2ru\3\2\2\2sq\3\2\2\2tl\3\2")
+        buf.write("\2\2tu\3\2\2\2uv\3\2\2\2vx\7\4\2\2w\67\3\2\2\2w:\3\2\2")
+        buf.write("\2w=\3\2\2\2w@\3\2\2\2wC\3\2\2\2wF\3\2\2\2wI\3\2\2\2w")
+        buf.write("L\3\2\2\2wO\3\2\2\2wR\3\2\2\2wU\3\2\2\2wX\3\2\2\2w[\3")
+        buf.write("\2\2\2wi\3\2\2\2x{\3\2\2\2yw\3\2\2\2yz\3\2\2\2z\5\3\2")
+        buf.write("\2\2{y\3\2\2\2|}\7\33\2\2}~\5\4\3\2~\177\7\20\2\2\177")
+        buf.write("\u0080\5\4\3\2\u0080\u0081\7\4\2\2\u0081\u0097\3\2\2\2")
+        buf.write("\u0082\u0083\7\34\2\2\u0083\u0086\5\4\3\2\u0084\u0085")
+        buf.write("\7\20\2\2\u0085\u0087\5\4\3\2\u0086\u0084\3\2\2\2\u0087")
+        buf.write("\u0088\3\2\2\2\u0088\u0086\3\2\2\2\u0088\u0089\3\2\2\2")
+        buf.write("\u0089\u008a\3\2\2\2\u008a\u008b\7\4\2\2\u008b\u0097\3")
+        buf.write("\2\2\2\u008c\u008d\7\35\2\2\u008d\u0090\5\4\3\2\u008e")
+        buf.write("\u008f\7\20\2\2\u008f\u0091\5\4\3\2\u0090\u008e\3\2\2")
+        buf.write("\2\u0091\u0092\3\2\2\2\u0092\u0090\3\2\2\2\u0092\u0093")
+        buf.write("\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0095\7\4\2\2\u0095")
+        buf.write("\u0097\3\2\2\2\u0096|\3\2\2\2\u0096\u0082\3\2\2\2\u0096")
+        buf.write("\u008c\3\2\2\2\u0097\7\3\2\2\2\u0098\u0099\t\4\2\2\u0099")
+        buf.write("\t\3\2\2\2\r%\65cfqtwy\u0088\u0092\u0096")
         return buf.getvalue()
 
 
@@ -890,7 +892,7 @@ class StreamerFormulaParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 47
+            self.state = 51
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
@@ -981,48 +983,68 @@ class StreamerFormulaParser ( Parser ):
                 pass
 
             elif la_ == 6:
-                localctx = StreamerFormulaParser.DecimalContext(self, localctx)
+                localctx = StreamerFormulaParser.IntegerContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 42
-                self.match(StreamerFormulaParser.Decimal)
+                self.match(StreamerFormulaParser.T__5)
+                self.state = 43
+                self.match(StreamerFormulaParser.Integer)
                 pass
 
             elif la_ == 7:
-                localctx = StreamerFormulaParser.DatetimeLiteralContext(self, localctx)
-                self._ctx = localctx
-                _prevctx = localctx
-                self.state = 43
-                self.match(StreamerFormulaParser.Datetime)
-                pass
-
-            elif la_ == 8:
-                localctx = StreamerFormulaParser.DateLiteralContext(self, localctx)
+                localctx = StreamerFormulaParser.DecimalContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 44
-                self.match(StreamerFormulaParser.Date)
+                self.match(StreamerFormulaParser.Decimal)
                 pass
 
-            elif la_ == 9:
-                localctx = StreamerFormulaParser.FieldContext(self, localctx)
+            elif la_ == 8:
+                localctx = StreamerFormulaParser.DecimalContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 45
-                self.match(StreamerFormulaParser.Field)
+                self.match(StreamerFormulaParser.T__5)
+                self.state = 46
+                self.match(StreamerFormulaParser.Decimal)
+                pass
+
+            elif la_ == 9:
+                localctx = StreamerFormulaParser.DatetimeLiteralContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 47
+                self.match(StreamerFormulaParser.Datetime)
                 pass
 
             elif la_ == 10:
+                localctx = StreamerFormulaParser.DateLiteralContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 48
+                self.match(StreamerFormulaParser.Date)
+                pass
+
+            elif la_ == 11:
+                localctx = StreamerFormulaParser.FieldContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 49
+                self.match(StreamerFormulaParser.Field)
+                pass
+
+            elif la_ == 12:
                 localctx = StreamerFormulaParser.StringLiteralContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 46
+                self.state = 50
                 self.string()
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 115
+            self.state = 119
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1030,259 +1052,259 @@ class StreamerFormulaParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 113
+                    self.state = 117
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
                     if la_ == 1:
                         localctx = StreamerFormulaParser.MultiplyContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 49
-                        if not self.precpred(self._ctx, 23):
+                        self.state = 53
+                        if not self.precpred(self._ctx, 25):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 23)")
-                        self.state = 50
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 25)")
+                        self.state = 54
                         self.match(StreamerFormulaParser.T__2)
-                        self.state = 51
-                        localctx.right = self.expr(24)
+                        self.state = 55
+                        localctx.right = self.expr(26)
                         pass
 
                     elif la_ == 2:
                         localctx = StreamerFormulaParser.DivideContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 52
-                        if not self.precpred(self._ctx, 22):
+                        self.state = 56
+                        if not self.precpred(self._ctx, 24):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 22)")
-                        self.state = 53
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 24)")
+                        self.state = 57
                         self.match(StreamerFormulaParser.T__3)
-                        self.state = 54
-                        localctx.right = self.expr(23)
+                        self.state = 58
+                        localctx.right = self.expr(25)
                         pass
 
                     elif la_ == 3:
                         localctx = StreamerFormulaParser.AddContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 55
-                        if not self.precpred(self._ctx, 21):
+                        self.state = 59
+                        if not self.precpred(self._ctx, 23):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 21)")
-                        self.state = 56
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 23)")
+                        self.state = 60
                         self.match(StreamerFormulaParser.T__4)
-                        self.state = 57
-                        localctx.right = self.expr(22)
+                        self.state = 61
+                        localctx.right = self.expr(24)
                         pass
 
                     elif la_ == 4:
                         localctx = StreamerFormulaParser.SubtractContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 58
-                        if not self.precpred(self._ctx, 20):
+                        self.state = 62
+                        if not self.precpred(self._ctx, 22):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 20)")
-                        self.state = 59
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 22)")
+                        self.state = 63
                         self.match(StreamerFormulaParser.T__5)
-                        self.state = 60
-                        localctx.right = self.expr(21)
+                        self.state = 64
+                        localctx.right = self.expr(23)
                         pass
 
                     elif la_ == 5:
                         localctx = StreamerFormulaParser.EqualContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 61
-                        if not self.precpred(self._ctx, 19):
+                        self.state = 65
+                        if not self.precpred(self._ctx, 21):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 19)")
-                        self.state = 62
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 21)")
+                        self.state = 66
                         self.match(StreamerFormulaParser.T__6)
-                        self.state = 63
-                        localctx.right = self.expr(20)
+                        self.state = 67
+                        localctx.right = self.expr(22)
                         pass
 
                     elif la_ == 6:
                         localctx = StreamerFormulaParser.GreaterThanContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 64
-                        if not self.precpred(self._ctx, 18):
+                        self.state = 68
+                        if not self.precpred(self._ctx, 20):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 18)")
-                        self.state = 65
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 20)")
+                        self.state = 69
                         self.match(StreamerFormulaParser.T__7)
-                        self.state = 66
-                        localctx.right = self.expr(19)
+                        self.state = 70
+                        localctx.right = self.expr(21)
                         pass
 
                     elif la_ == 7:
                         localctx = StreamerFormulaParser.GreaterEqualContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 67
-                        if not self.precpred(self._ctx, 17):
+                        self.state = 71
+                        if not self.precpred(self._ctx, 19):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 17)")
-                        self.state = 68
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 19)")
+                        self.state = 72
                         self.match(StreamerFormulaParser.T__8)
-                        self.state = 69
-                        localctx.right = self.expr(18)
+                        self.state = 73
+                        localctx.right = self.expr(20)
                         pass
 
                     elif la_ == 8:
                         localctx = StreamerFormulaParser.LessThanContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 70
-                        if not self.precpred(self._ctx, 16):
+                        self.state = 74
+                        if not self.precpred(self._ctx, 18):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 16)")
-                        self.state = 71
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 18)")
+                        self.state = 75
                         self.match(StreamerFormulaParser.T__9)
-                        self.state = 72
-                        localctx.right = self.expr(17)
+                        self.state = 76
+                        localctx.right = self.expr(19)
                         pass
 
                     elif la_ == 9:
                         localctx = StreamerFormulaParser.LessEqualContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 73
-                        if not self.precpred(self._ctx, 15):
+                        self.state = 77
+                        if not self.precpred(self._ctx, 17):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 15)")
-                        self.state = 74
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 17)")
+                        self.state = 78
                         self.match(StreamerFormulaParser.T__10)
-                        self.state = 75
-                        localctx.right = self.expr(16)
+                        self.state = 79
+                        localctx.right = self.expr(18)
                         pass
 
                     elif la_ == 10:
                         localctx = StreamerFormulaParser.NotEqualContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 76
-                        if not self.precpred(self._ctx, 14):
+                        self.state = 80
+                        if not self.precpred(self._ctx, 16):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 14)")
-                        self.state = 77
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 16)")
+                        self.state = 81
                         self.match(StreamerFormulaParser.T__11)
-                        self.state = 78
-                        localctx.right = self.expr(15)
+                        self.state = 82
+                        localctx.right = self.expr(17)
                         pass
 
                     elif la_ == 11:
                         localctx = StreamerFormulaParser.AndContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 79
-                        if not self.precpred(self._ctx, 11):
+                        self.state = 83
+                        if not self.precpred(self._ctx, 13):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 11)")
-                        self.state = 80
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 13)")
+                        self.state = 84
                         _la = self._input.LA(1)
                         if not(_la==StreamerFormulaParser.T__15 or _la==StreamerFormulaParser.T__16):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 81
-                        localctx.right = self.expr(12)
+                        self.state = 85
+                        localctx.right = self.expr(14)
                         pass
 
                     elif la_ == 12:
                         localctx = StreamerFormulaParser.OrContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 82
-                        if not self.precpred(self._ctx, 10):
+                        self.state = 86
+                        if not self.precpred(self._ctx, 12):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
-                        self.state = 83
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 12)")
+                        self.state = 87
                         _la = self._input.LA(1)
                         if not(_la==StreamerFormulaParser.T__17 or _la==StreamerFormulaParser.T__18):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 84
-                        localctx.right = self.expr(11)
+                        self.state = 88
+                        localctx.right = self.expr(13)
                         pass
 
                     elif la_ == 13:
                         localctx = StreamerFormulaParser.InContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 85
-                        if not self.precpred(self._ctx, 13):
+                        self.state = 89
+                        if not self.precpred(self._ctx, 15):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 13)")
-                        self.state = 86
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 15)")
+                        self.state = 90
                         self.match(StreamerFormulaParser.T__12)
-                        self.state = 87
+                        self.state = 91
                         self.match(StreamerFormulaParser.T__0)
-                        self.state = 96
+                        self.state = 100
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StreamerFormulaParser.T__0) | (1 << StreamerFormulaParser.T__19) | (1 << StreamerFormulaParser.T__24) | (1 << StreamerFormulaParser.T__25) | (1 << StreamerFormulaParser.T__26) | (1 << StreamerFormulaParser.Integer) | (1 << StreamerFormulaParser.Decimal) | (1 << StreamerFormulaParser.Date) | (1 << StreamerFormulaParser.Datetime) | (1 << StreamerFormulaParser.Field) | (1 << StreamerFormulaParser.SingleQuoteString) | (1 << StreamerFormulaParser.DoubleQuoteString))) != 0):
-                            self.state = 88
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StreamerFormulaParser.T__0) | (1 << StreamerFormulaParser.T__5) | (1 << StreamerFormulaParser.T__19) | (1 << StreamerFormulaParser.T__24) | (1 << StreamerFormulaParser.T__25) | (1 << StreamerFormulaParser.T__26) | (1 << StreamerFormulaParser.Integer) | (1 << StreamerFormulaParser.Decimal) | (1 << StreamerFormulaParser.Date) | (1 << StreamerFormulaParser.Datetime) | (1 << StreamerFormulaParser.Field) | (1 << StreamerFormulaParser.SingleQuoteString) | (1 << StreamerFormulaParser.DoubleQuoteString))) != 0):
+                            self.state = 92
                             self.expr(0)
-                            self.state = 93
+                            self.state = 97
                             self._errHandler.sync(self)
                             _la = self._input.LA(1)
                             while _la==StreamerFormulaParser.T__13:
-                                self.state = 89
+                                self.state = 93
                                 self.match(StreamerFormulaParser.T__13)
-                                self.state = 90
+                                self.state = 94
                                 self.expr(0)
-                                self.state = 95
+                                self.state = 99
                                 self._errHandler.sync(self)
                                 _la = self._input.LA(1)
 
 
 
-                        self.state = 98
+                        self.state = 102
                         self.match(StreamerFormulaParser.T__1)
                         pass
 
                     elif la_ == 14:
                         localctx = StreamerFormulaParser.NotInContext(self, StreamerFormulaParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 99
-                        if not self.precpred(self._ctx, 12):
+                        self.state = 103
+                        if not self.precpred(self._ctx, 14):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 12)")
-                        self.state = 100
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 14)")
+                        self.state = 104
                         self.match(StreamerFormulaParser.T__14)
-                        self.state = 101
+                        self.state = 105
                         self.match(StreamerFormulaParser.T__0)
-                        self.state = 110
+                        self.state = 114
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StreamerFormulaParser.T__0) | (1 << StreamerFormulaParser.T__19) | (1 << StreamerFormulaParser.T__24) | (1 << StreamerFormulaParser.T__25) | (1 << StreamerFormulaParser.T__26) | (1 << StreamerFormulaParser.Integer) | (1 << StreamerFormulaParser.Decimal) | (1 << StreamerFormulaParser.Date) | (1 << StreamerFormulaParser.Datetime) | (1 << StreamerFormulaParser.Field) | (1 << StreamerFormulaParser.SingleQuoteString) | (1 << StreamerFormulaParser.DoubleQuoteString))) != 0):
-                            self.state = 102
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StreamerFormulaParser.T__0) | (1 << StreamerFormulaParser.T__5) | (1 << StreamerFormulaParser.T__19) | (1 << StreamerFormulaParser.T__24) | (1 << StreamerFormulaParser.T__25) | (1 << StreamerFormulaParser.T__26) | (1 << StreamerFormulaParser.Integer) | (1 << StreamerFormulaParser.Decimal) | (1 << StreamerFormulaParser.Date) | (1 << StreamerFormulaParser.Datetime) | (1 << StreamerFormulaParser.Field) | (1 << StreamerFormulaParser.SingleQuoteString) | (1 << StreamerFormulaParser.DoubleQuoteString))) != 0):
+                            self.state = 106
                             self.expr(0)
-                            self.state = 107
+                            self.state = 111
                             self._errHandler.sync(self)
                             _la = self._input.LA(1)
                             while _la==StreamerFormulaParser.T__13:
-                                self.state = 103
+                                self.state = 107
                                 self.match(StreamerFormulaParser.T__13)
-                                self.state = 104
+                                self.state = 108
                                 self.expr(0)
-                                self.state = 109
+                                self.state = 113
                                 self._errHandler.sync(self)
                                 _la = self._input.LA(1)
 
 
 
-                        self.state = 112
+                        self.state = 116
                         self.match(StreamerFormulaParser.T__1)
                         pass
 
              
-                self.state = 117
+                self.state = 121
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
 
@@ -1402,69 +1424,69 @@ class StreamerFormulaParser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_function)
         self._la = 0 # Token type
         try:
-            self.state = 144
+            self.state = 148
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [StreamerFormulaParser.T__24]:
                 localctx = StreamerFormulaParser.PowContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 118
-                self.match(StreamerFormulaParser.T__24)
-                self.state = 119
-                self.expr(0)
-                self.state = 120
-                self.match(StreamerFormulaParser.T__13)
-                self.state = 121
-                self.expr(0)
                 self.state = 122
+                self.match(StreamerFormulaParser.T__24)
+                self.state = 123
+                self.expr(0)
+                self.state = 124
+                self.match(StreamerFormulaParser.T__13)
+                self.state = 125
+                self.expr(0)
+                self.state = 126
                 self.match(StreamerFormulaParser.T__1)
                 pass
             elif token in [StreamerFormulaParser.T__25]:
                 localctx = StreamerFormulaParser.MinContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 124
+                self.state = 128
                 self.match(StreamerFormulaParser.T__25)
-                self.state = 125
+                self.state = 129
                 self.expr(0)
-                self.state = 128 
+                self.state = 132 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 126
+                    self.state = 130
                     self.match(StreamerFormulaParser.T__13)
-                    self.state = 127
+                    self.state = 131
                     self.expr(0)
-                    self.state = 130 
+                    self.state = 134 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==StreamerFormulaParser.T__13):
                         break
 
-                self.state = 132
+                self.state = 136
                 self.match(StreamerFormulaParser.T__1)
                 pass
             elif token in [StreamerFormulaParser.T__26]:
                 localctx = StreamerFormulaParser.MaxContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 134
+                self.state = 138
                 self.match(StreamerFormulaParser.T__26)
-                self.state = 135
+                self.state = 139
                 self.expr(0)
-                self.state = 138 
+                self.state = 142 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 136
+                    self.state = 140
                     self.match(StreamerFormulaParser.T__13)
-                    self.state = 137
+                    self.state = 141
                     self.expr(0)
-                    self.state = 140 
+                    self.state = 144 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==StreamerFormulaParser.T__13):
                         break
 
-                self.state = 142
+                self.state = 146
                 self.match(StreamerFormulaParser.T__1)
                 pass
             else:
@@ -1518,7 +1540,7 @@ class StreamerFormulaParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 146
+            self.state = 150
             _la = self._input.LA(1)
             if not(_la==StreamerFormulaParser.SingleQuoteString or _la==StreamerFormulaParser.DoubleQuoteString):
                 self._errHandler.recoverInline(self)
@@ -1547,59 +1569,59 @@ class StreamerFormulaParser ( Parser ):
 
     def expr_sempred(self, localctx:ExprContext, predIndex:int):
             if predIndex == 0:
-                return self.precpred(self._ctx, 23)
+                return self.precpred(self._ctx, 25)
          
 
             if predIndex == 1:
-                return self.precpred(self._ctx, 22)
+                return self.precpred(self._ctx, 24)
          
 
             if predIndex == 2:
-                return self.precpred(self._ctx, 21)
+                return self.precpred(self._ctx, 23)
          
 
             if predIndex == 3:
-                return self.precpred(self._ctx, 20)
+                return self.precpred(self._ctx, 22)
          
 
             if predIndex == 4:
-                return self.precpred(self._ctx, 19)
+                return self.precpred(self._ctx, 21)
          
 
             if predIndex == 5:
-                return self.precpred(self._ctx, 18)
+                return self.precpred(self._ctx, 20)
          
 
             if predIndex == 6:
-                return self.precpred(self._ctx, 17)
+                return self.precpred(self._ctx, 19)
          
 
             if predIndex == 7:
-                return self.precpred(self._ctx, 16)
+                return self.precpred(self._ctx, 18)
          
 
             if predIndex == 8:
-                return self.precpred(self._ctx, 15)
+                return self.precpred(self._ctx, 17)
          
 
             if predIndex == 9:
-                return self.precpred(self._ctx, 14)
+                return self.precpred(self._ctx, 16)
          
 
             if predIndex == 10:
-                return self.precpred(self._ctx, 11)
-         
-
-            if predIndex == 11:
-                return self.precpred(self._ctx, 10)
-         
-
-            if predIndex == 12:
                 return self.precpred(self._ctx, 13)
          
 
-            if predIndex == 13:
+            if predIndex == 11:
                 return self.precpred(self._ctx, 12)
+         
+
+            if predIndex == 12:
+                return self.precpred(self._ctx, 15)
+         
+
+            if predIndex == 13:
+                return self.precpred(self._ctx, 14)
          
 
 

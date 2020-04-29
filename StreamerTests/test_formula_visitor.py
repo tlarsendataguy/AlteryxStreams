@@ -7,6 +7,8 @@ class FormulaVisitorTests(unittest.TestCase):
     def test_basic_expressions(self):
         self.assertEqual(6, calculate('4 + 2'))
         self.assertEqual(4, calculate('6 - 2'))
+        self.assertEqual(4, calculate('6-2'))
+        self.assertEqual(-4, calculate('-4'))
         self.assertEqual(8, calculate('4 * 2'))
         self.assertEqual(4, calculate('8 / 2'))
         self.assertEqual(True, calculate('2 = 2'))
@@ -39,6 +41,7 @@ class FormulaVisitorTests(unittest.TestCase):
         self.assertEqual(8, calculate('POW(2,3)'))
         self.assertEqual(0, calculate('Min(4,8,2,4,6,0,3)'))
         self.assertEqual(8, calculate('Max(4,8,2,4,6,0,3)'))
+        self.assertRaises(Exception, lambda: calculate('2 * (1 + 3'))
 
     def test_field_expressions(self):
         fields = {
@@ -48,6 +51,15 @@ class FormulaVisitorTests(unittest.TestCase):
         visitor = FormulaVisitor(expression=expression, fields=fields)
         self.assertEqual(10, visitor.calculate())
 
+    def test_field_expressions_invalid_syntax(self):
+        fields = {
+            'Field1': lambda: 10
+        }
+        expression = '[Field1] * (2 + [Field1]'
+        with self.assertRaises(Exception) as ex:
+            FormulaVisitor(expression=expression, fields=fields)
+            print(ex)
+
     def test_missing_field(self):
         fields = {
             'field1': lambda: 10
@@ -56,7 +68,7 @@ class FormulaVisitorTests(unittest.TestCase):
         visitor = FormulaVisitor(expression=expression, fields=fields)
         with self.assertRaises(MissingFieldException) as ex:
             visitor.calculate()
-        print(ex)
+            print(ex)
 
 
 if __name__ == '__main__':

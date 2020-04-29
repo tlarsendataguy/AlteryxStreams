@@ -31,7 +31,9 @@ expr
       'ELSE' expr
       'ENDIF'                                                        # elseIf
     | Integer                                                        # integer
+    | '-'Integer                                                     # integer
     | Decimal                                                        # decimal
+    | '-'Decimal                                                     # decimal
     | Datetime                                                       # datetimeLiteral
     | Date                                                           # dateLiteral
     | Field                                                          # field
@@ -49,8 +51,8 @@ string
     | DoubleQuoteString
     ;
 
-Integer          : '-'?[0-9]+ ;
-Decimal          : '-'?[0-9]*'.'[0-9]+ ;
+Integer          : [0-9]+ ;
+Decimal          : [0-9]*'.'[0-9]+ ;
 Date             : ['][0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9] [']
                  | '"'[0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9]'"';
 Datetime         : ['][0-9][0-9][0-9][0-9]'-'[0-9][0-9]'-'[0-9][0-9]' '[0-9][0-9]':'[0-9][0-9]':'[0-9][0-9][']

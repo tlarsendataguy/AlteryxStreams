@@ -1,6 +1,7 @@
 import datetime
 
 from antlr4 import *
+from antlr4.error.ErrorListener import ErrorListener
 from StreamerFormulaParser import StreamerFormulaParser
 from StreamerFormulaLexer import StreamerFormulaLexer
 from typing import Callable, Dict
@@ -10,6 +11,9 @@ class MissingFieldException(Exception):
     def __init__(self, missing_field: str):
         self.MissingField = missing_field
 
+    def __str__(self):
+        return "Missing field {field}".format(field=self.MissingField)
+
 
 def calculate(expression: str, fields=None):
     if fields is None:
@@ -18,13 +22,24 @@ def calculate(expression: str, fields=None):
     return visitor.calculate()
 
 
+class FormulaErrorListener(ErrorListener):
+
+    def __init__(self):
+        super(FormulaErrorListener, self).__init__()
+
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        raise Exception("{line}:{col} {msg}".format(line=line, col=column, msg=msg))
+
+
 class FormulaVisitor(ParseTreeVisitor):
     def __init__(self, expression: str, fields: Dict[str, Callable]):
         self.Expression = expression
         self.Fields = fields
         lexer = StreamerFormulaLexer(InputStream(expression))
+        lexer.addErrorListener(FormulaErrorListener())
         stream = CommonTokenStream(lexer)
         parser = StreamerFormulaParser(stream)
+        parser.addErrorListener(FormulaErrorListener())
         self._tree = parser.formula()
 
     def _left_right_check(self, ctx, operator):
