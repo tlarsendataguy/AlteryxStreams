@@ -3,7 +3,16 @@
 <head>
   <meta charset="utf-8">
   <title>Scan</title>
+  <style>
+    @font-face {
+      font-family: JetBrainsMono-Regular;
+      src: url(JetBrainsMono-Regular.woff);
+    }
 
+    * {
+      font-family: JetBrainsMono-Regular !important;
+    }
+  </style>
   <script type="text/javascript">
     document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
   </script>
@@ -18,7 +27,7 @@
         <label>XMSG("Data Type:")</label>
 		<ayx data-ui-props="{type: 'DropDown'}" data-item-props="{dataName: 'DataType', dataType: 'StringSelector', optionList: [{value: 'String', label: 'String'},{value: 'Integer', label: 'Integer'},{value: 'Decimal', label: 'Decimal'},{value: 'Date', label: 'Date'},{value: 'Datetime', label: 'Datetime'}]}"></ayx>
         <label>XMSG("Formula:")</label>
-		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Formula', dataType: 'SimpleString'}"></ayx>
+		<ayx data-ui-props="{type: 'TextArea', rows: 10}" data-item-props="{dataName: 'Formula', dataType: 'SimpleString'}"></ayx>
         <label>XMSG("Initial Value:")</label>
 		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'InitialValue', dataType: 'SimpleString'}"></ayx>
       </div>
