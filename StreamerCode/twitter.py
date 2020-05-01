@@ -1,8 +1,4 @@
-import asyncio
-import collections
 import datetime
-import threading
-
 import AlteryxPythonSDK as Sdk
 import xml.etree.ElementTree as Et
 import tweepy
@@ -79,21 +75,13 @@ class IncomingInterface:
         self.EventField: Sdk.Field = None
         self.Listener = TwitterListener(self._push_tweet, parent.display_error_msg, parent.display_warning_msg)
         self.Stream = None
-        self.Info = None
-        self.AuthorField = None
-        self.TextField = None
-        self.CreatedAtField = None
-        self.Creator = None
-        self.LoopTask = None
-        self.TweetQueue = collections.deque()
-
-    def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
         self.Info = Sdk.RecordInfo(self.parent.alteryx_engine)
-        self.Info.add_field('Author', Sdk.FieldType.v_wstring, 1073741823, 0)
-        self.Info.add_field('Text', Sdk.FieldType.v_wstring, 1073741823, 0)
-        self.Info.add_field('Created At', Sdk.FieldType.datetime, 19, 0)
+        self.AuthorField = self.Info.add_field('Author', Sdk.FieldType.v_wstring, 1073741823, 0)
+        self.TextField = self.Info.add_field('Text', Sdk.FieldType.v_wstring, 1073741823, 0)
+        self.CreatedAtField = self.Info.add_field('Created At', Sdk.FieldType.datetime, 19, 0)
         self.Creator = self.Info.construct_record_creator()
 
+    def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
         self.EventField = record_info_in.get_field_by_name('Event')
         if self.EventField is None:
             self.parent.display_error_msg("Incoming data source must contain an 'Event' text field that pushes 'Start' and 'End' events")
@@ -109,8 +97,6 @@ class IncomingInterface:
             if self.Stream is not None:
                 self.Stream.disconnect()
                 self.parent.display_info_msg("stopped listening for Tweets")
-            if self.LoopTask is not None:
-                self.LoopTask.cancel()
             return True
 
         consumer_key = self.parent.alteryx_engine.decrypt_password(self.parent.ConsumerKey)
@@ -122,10 +108,6 @@ class IncomingInterface:
 
         self.Stream = tweepy.Stream(auth, self.Listener)
 
-        event_loop = asyncio.get_event_loop()
-        self.LoopTask = event_loop.create_task(self._check_queue_async())
-        threading.Thread(target=self.LoopTask).start()
-
         self.Stream.filter(follow=self.parent.Follow, track=self.parent.Track, is_async=True)
         self.parent.display_info_msg("started listening for Tweets")
         return True
@@ -135,43 +117,14 @@ class IncomingInterface:
         self.parent.alteryx_engine.output_tool_progress(self.parent.n_tool_id, d_percent)
 
     def ii_close(self):
-        self.LoopTask.cancel()
         self.parent.Output.assert_close()
         return
 
     def _push_tweet(self, author: str, text: str, created_at: datetime.datetime):
-        self.parent.display_info_msg("push tweet data onto stack")
-        self.TweetQueue.append(TweetData(author, text, created_at))
+        self.Creator.reset()
+        self.AuthorField.set_from_string(self.Creator, author)
+        self.TextField.set_from_string(self.Creator, text)
+        self.CreatedAtField.set_from_string(self.Creator, created_at.strftime("%Y-%m-%d %H:%M:%S"))
+        output = self.Creator.finalize_record()
+        self.parent.Output.push_record(output)
 
-    async def _check_queue_async(self):
-        self.parent.display_info_msg("starting check queue loop")
-        try:
-            while True:
-                try:
-                    tweet = self.TweetQueue.popleft()
-                    self.parent.display_info_msg("got tweet data from stack")
-                    self.Creator.reset()
-                    self.parent.display_info_msg("reset creator")
-                    self.Info.get_field_by_name('Author').set_from_string(self.Creator, tweet.Author)
-                    self.parent.display_info_msg("set author field")
-                    self.Info.get_field_by_name('Text').set_from_string(self.Creator, tweet.Text)
-                    self.parent.display_info_msg("set text field")
-                    self.Info.get_field_by_name('Created At').set_from_string(self.Creator, datetime.datetime.strftime(tweet.CreatedAt, "%Y-%m-%d %H:%M:%S"))
-                    self.parent.display_info_msg("set created at field")
-                    output = self.Creator.finalize_record()
-                    self.parent.display_info_msg("finalize record")
-                    self.parent.Output.push_record(output)
-                    self.parent.display_info_msg("push record")
-                except IndexError:
-                    pass
-        except asyncio.CancelledError:
-            self.parent.display_info_msg("was cancelled")
-        self.parent.display_info_msg("ending check queue loop")
-        return
-
-
-class TweetData:
-    def __init__(self, author, text, created_at):
-        self.Author = author
-        self.Text = text
-        self.CreatedAt = created_at
