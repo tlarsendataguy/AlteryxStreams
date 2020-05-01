@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Callable, Dict
 from formula_visitor import FormulaVisitor, calculate
 import AlteryxPythonSDK as Sdk

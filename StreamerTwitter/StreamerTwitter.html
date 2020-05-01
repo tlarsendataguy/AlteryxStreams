@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+<head>
+  <meta charset="utf-8">
+  <title>Streamer Twitter</title>
+  <style>
+    @font-face {
+      font-family: JetBrainsMono-Regular;
+      src: url("JetBrainsMono-Regular.woff");
+    }
+
+    * {
+      font-family: JetBrainsMono-Regular !important;
+    }
+  </style>
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend class='blueTitle'>XMSG("Streamer Twitter")</legend>
+      <div class=''>
+        <label>XMSG("Consumer Key:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'ConsumerKey', dataType: 'SimpleString', password: true, encryptionMode: 'user'}"></ayx>
+        <label>XMSG("Consumer Secret:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'ConsumerSecret', dataType: 'SimpleString', password: true, encryptionMode: 'user'}"></ayx>
+        <label>XMSG("Access Token:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'AccessToken', dataType: 'SimpleString', password: true, encryptionMode: 'user'}"></ayx>
+        <label>XMSG("Access Token Secret:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'AccessTokenSecret', dataType: 'SimpleString', password: true, encryptionMode: 'user'}"></ayx>
+        <label>XMSG("Subscribe to users (separate with commas):")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Follow', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Subscribe to keywords (separate with commas):")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Track', dataType: 'SimpleString'}"></ayx>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>

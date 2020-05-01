@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+<head>
+  <meta charset="utf-8">
+  <title>Streamer Event Hubs</title>
+  <style>
+    @font-face {
+      font-family: JetBrainsMono-Regular;
+      src: url("JetBrainsMono-Regular.woff");
+    }
+
+    * {
+      font-family: JetBrainsMono-Regular !important;
+    }
+  </style>
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend class='blueTitle'>XMSG("Streamer Event Hubs")</legend>
+      <div class=''>
+        <label>XMSG("Connection String:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'ConnStr', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Consumer Group:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'ConsumerGroup', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Event Hub Name:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'EventhubName', dataType: 'SimpleString'}"></ayx>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>

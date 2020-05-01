@@ -13,3 +13,5 @@ mklink /D %streamerdir%\StreamerSample %CD%\StreamerSample
 mklink /D %streamerdir%\StreamerTimeInterval %CD%\StreamerTimeInterval
 mklink /D %streamerdir%\StreamerScan %CD%\StreamerScan
 mklink /D %streamerdir%\StreamerReduce %CD%\StreamerReduce
+mklink /D %streamerdir%\StreamerTwitter %CD%\StreamerTwitter
+mklink /D %streamerdir%\StreamerEventHub %CD%\StreamerEventHub

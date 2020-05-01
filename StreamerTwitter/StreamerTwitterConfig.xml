@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <AlteryxJavaScriptPlugin>
-  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\interval.py" SDKVersion="10.1" ToolFamily="AlteryxStreams" />
-  <GuiSettings Html="StreamerInterval.html" Icon="StreamerInterval.png" Help="" SDKVersion="10.1">
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\twitter.py" SDKVersion="10.1" ToolFamily="AlteryxStreams" />
+  <GuiSettings Html="StreamerTwitter.html" Icon="StreamerTwitter.png" Help="" SDKVersion="10.1">
     <InputConnections>
       <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
     </InputConnections>
@@ -11,8 +11,8 @@
   </GuiSettings>
   <Properties>
     <MetaInfo>
-      <Name>Interval</Name>
-      <Description>Emits a sequence of integers spaced by a given time interval</Description>
+      <Name>Twitter</Name>
+      <Description>Listens to new Tweets and streams them into the workflow</Description>
       <CategoryName>Streamer</CategoryName>
       <SearchTags>python, sdk</SearchTags>
       <ToolVersion>1.00</ToolVersion>
