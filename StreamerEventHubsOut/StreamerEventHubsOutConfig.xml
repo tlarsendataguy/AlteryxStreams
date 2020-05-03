@@ -1,18 +1,15 @@
 <?xml version="1.0"?>
 <AlteryxJavaScriptPlugin>
-  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\event_hubs.py" SDKVersion="10.1" ToolFamily="AlteryxStreams" />
-  <GuiSettings Html="StreamerEventHub.html" Icon="StreamerEventHub.png" Help="" SDKVersion="10.1">
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\event_hubs_out.py" SDKVersion="10.1" ToolFamily="AlteryxStreams" />
+  <GuiSettings Html="StreamerEventHubsOut.html" Icon="StreamerEventHubsOut.png" Help="" SDKVersion="10.1">
     <InputConnections>
       <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
     </InputConnections>
-    <OutputConnections>
-      <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
-    </OutputConnections>
   </GuiSettings>
   <Properties>
     <MetaInfo>
-      <Name>Azure Event Hubs</Name>
-      <Description>Subscribes to Azure Event Hubs events</Description>
+      <Name>Azure Event Hubs Out</Name>
+      <Description>Publish records to Azure Event Hubs</Description>
       <CategoryName>Streamer</CategoryName>
       <SearchTags>python, sdk</SearchTags>
       <ToolVersion>1.00</ToolVersion>

@@ -2,7 +2,7 @@
 <html style="padding:20px">
 <head>
   <meta charset="utf-8">
-  <title>Streamer Event Hubs</title>
+  <title>Streamer Event Hubs In</title>
   <style>
     @font-face {
       font-family: JetBrainsMono-Regular;
@@ -20,14 +20,18 @@
 <body>
   <form>
     <fieldset>
-      <legend class='blueTitle'>XMSG("Streamer Event Hubs")</legend>
+      <legend class='blueTitle'>XMSG("Streamer Event Hubs In")</legend>
       <div class=''>
+        <label>XMSG("Checkpoint Storage Connection String:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'CheckpointConnStr', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Checkpoint Storage Container Name:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'CheckpointContainer', dataType: 'SimpleString'}"></ayx>
         <label>XMSG("Connection String:")</label>
-		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'ConnStr', dataType: 'SimpleString'}"></ayx>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'EventHubsConnStr', dataType: 'SimpleString'}"></ayx>
         <label>XMSG("Consumer Group:")</label>
 		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'ConsumerGroup', dataType: 'SimpleString'}"></ayx>
         <label>XMSG("Event Hub Name:")</label>
-		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'EventhubName', dataType: 'SimpleString'}"></ayx>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'EventHubName', dataType: 'SimpleString'}"></ayx>
       </div>
     </fieldset>
   </form>
