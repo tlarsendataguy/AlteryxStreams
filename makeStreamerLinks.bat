@@ -16,3 +16,4 @@ mklink /D %streamerdir%\StreamerReduce %CD%\StreamerReduce
 mklink /D %streamerdir%\StreamerTwitter %CD%\StreamerTwitter
 mklink /D %streamerdir%\StreamerEventHubsIn %CD%\StreamerEventHubsIn
 mklink /D %streamerdir%\StreamerEventHubsOut %CD%\StreamerEventHubsOut
+mklink /D %streamerdir%\StreamerBuffer %CD%\StreamerBuffer
