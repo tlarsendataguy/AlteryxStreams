@@ -3,7 +3,8 @@ from typing import Dict
 from formula_getter_setter import integer_types, decimal_types
 import AlteryxPythonSDK as Sdk
 import xml.etree.ElementTree as Et
-from azure.eventhub import EventHubProducerClient, EventData
+import pika
+
 
 class AyxPlugin:
     def __init__(self, n_tool_id: int, alteryx_engine: object, output_anchor_mgr: object):
@@ -11,17 +12,17 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Event Hubs Out (" + str(n_tool_id) + ")"
+        self.label = "RabbitMQ Out (" + str(n_tool_id) + ")"
 
         # Custom properties
-        self.EventHubsConnStr = ''
-        self.EventHubName = ''
+        self.Host = ''
+        self.Queue = ''
 
     def pi_init(self, str_xml: str):
         xml = Et.fromstring(str_xml)
-        self.EventHubsConnStr = xml.find("EventHubsConnStr").text if 'EventHubsConnStr' in str_xml else ''
-        self.EventHubName = xml.find("EventHubName").text if 'EventHubName' in str_xml else ''
-        if self.EventHubsConnStr == '' or self.EventHubName == '':
+        self.Host = xml.find("Host").text if 'Host' in str_xml else ''
+        self.Queue = xml.find("Queue").text if 'Queue' in str_xml else ''
+        if self.Host == '' or self.Queue == '':
             self.display_error_msg('One or more parameters were empty.  All configuration parameters are required.')
 
     def pi_add_incoming_connection(self, str_type: str, str_name: str) -> object:
@@ -48,16 +49,18 @@ class IncomingInterface:
         # Default properties
         self.parent: AyxPlugin = parent
         self.Info: Sdk.RecordInfo = None
-        self.Producer: EventHubProducerClient = None
+        self.Connection: pika.BlockingConnection = None
+        self.Channel = None
         self.DataMap: Dict[str, any] = {}
 
     def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
         self.Info = record_info_in
-        self.Producer = EventHubProducerClient.from_connection_string(conn_str=self.parent.EventHubsConnStr,
-                                                                      eventhub_name=self.parent.EventHubName)
+        self.Connection = pika.BlockingConnection(pika.ConnectionParameters(host=self.parent.Host))
+        self.Channel = self.Connection.channel()
+        self.Channel.queue_declare(self.parent.Queue)
         for field in self.Info:
             self.DataMap[field.name] = None
-        self.parent.display_info_msg("Event Hubs producer client created")
+        self.parent.display_info_msg("RabbitMQ connection created")
         return True
 
     def ii_push_record(self, in_record: Sdk.RecordRef) -> bool:
@@ -72,13 +75,11 @@ class IncomingInterface:
                 self.DataMap[field.name] = field.get_as_string(in_record)
 
         encoded = json.dumps(self.DataMap)
-        event_data = EventData(encoded)
-        batch = self.Producer.create_batch()
-        batch.add(event_data)
+
         try:
-            self.Producer.send_batch(batch)
+            self.Channel.basic_publish(exchange='', routing_key=self.parent.Queue, body=encoded)
         except Exception as ex:
-            self.parent.display_error_msg('Error sending to Azure Event Hubs: ' + str(ex))
+            self.parent.display_error_msg('Error sending to RabbitMQ: ' + str(ex))
         self.parent.display_info_msg('sent message')
         return True
 

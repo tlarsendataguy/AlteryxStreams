@@ -82,7 +82,7 @@ class IncomingInterface:
         self.Creator = self.Info.construct_record_creator()
 
     def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
-        self.EventField = record_info_in.get_field_by_name('Event')
+        self.EventField = record_info_in.get_field_by_name('Event', throw_error=False)
         if self.EventField is None:
             self.parent.display_error_msg("Incoming data source must contain an 'Event' text field that pushes 'Start' and 'End' events")
             return False

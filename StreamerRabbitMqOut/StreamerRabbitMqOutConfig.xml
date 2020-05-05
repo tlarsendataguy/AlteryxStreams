@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<AlteryxJavaScriptPlugin>
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\rabbitmq_out.py" SDKVersion="10.1" ToolFamily="AlteryxStreams" />
+  <GuiSettings Html="StreamerRabbitMqOut.html" Icon="StreamerRabbitMqOut.png" Help="" SDKVersion="10.1">
+    <InputConnections>
+      <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
+    </InputConnections>
+  </GuiSettings>
+  <Properties>
+    <MetaInfo>
+      <Name>RabbitMQ Out</Name>
+      <Description>Push messages to a RabbitMQ queue</Description>
+      <CategoryName>Streamer</CategoryName>
+      <SearchTags>python, sdk</SearchTags>
+      <ToolVersion>1.00</ToolVersion>
+      <Author>tlarsendataguy</Author>
+      <Company></Company>
+      <Copyright>2020</Copyright>
+    </MetaInfo>
+  </Properties>
+</AlteryxJavaScriptPlugin>

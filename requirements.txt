@@ -2,3 +2,4 @@ azure-eventhub-checkpointstoreblob-aio
 azure-eventhub
 antlr4-python3-runtime
 tweepy
+pika

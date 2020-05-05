@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+<head>
+  <meta charset="utf-8">
+  <title>Streamer RabbitMQ Out</title>
+  <style>
+    @font-face {
+      font-family: JetBrainsMono-Regular;
+      src: url("JetBrainsMono-Regular.woff");
+    }
+
+    * {
+      font-family: JetBrainsMono-Regular !important;
+    }
+  </style>
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend class='blueTitle'>XMSG("Streamer RabbitMQ Out")</legend>
+      <div class=''>
+        <label>XMSG("Host:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Host', dataType: 'SimpleString'}"></ayx>
+        <label>XMSG("Queue Name:")</label>
+		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'Queue', dataType: 'SimpleString'}"></ayx>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>

@@ -1,7 +1,7 @@
-import threading
 import AlteryxPythonSDK as Sdk
 import xml.etree.ElementTree as Et
 import asyncio
+import pika
 
 
 class AyxPlugin:
@@ -10,16 +10,19 @@ class AyxPlugin:
         self.n_tool_id: int = n_tool_id
         self.alteryx_engine: Sdk.AlteryxEngine = alteryx_engine
         self.output_anchor_mgr: Sdk.OutputAnchorManager = output_anchor_mgr
-        self.label = "Interval (" + str(n_tool_id) + ")"
+        self.label = "RabbitMQ In (" + str(n_tool_id) + ")"
 
         # Custom properties
         self.Output: Sdk.OutputAnchor = None
-        self.Seconds: int = 0
+        self.Host = ''
+        self.Queue = ''
 
     def pi_init(self, str_xml: str):
-        self.Seconds = int(Et.fromstring(str_xml).find("Seconds").text) if 'Seconds' in str_xml else 0
-        if self.Seconds <= 0:
-            self.display_error_msg('Seconds between records must be a positive, non-zero number')
+        xml = Et.fromstring(str_xml)
+        self.Host = xml.find("Host").text if 'Host' in str_xml else ''
+        self.Queue = xml.find("Queue").text if 'Queue' in str_xml else ''
+        if self.Host == '' or self.Queue == '':
+            self.display_error_msg('One or more parameters were empty.  All configuration parameters are required.')
 
         # Getting the output anchor from Config.xml by the output connection name
         self.Output = self.output_anchor_mgr.get_output_anchor('Output')
@@ -47,34 +50,38 @@ class IncomingInterface:
     def __init__(self, parent: AyxPlugin):
         # Default properties
         self.parent: AyxPlugin = parent
+        self.RecordInfo = Sdk.RecordInfo(self.parent.alteryx_engine)
+        self.MessageField = self.RecordInfo.add_field("Message", Sdk.FieldType.v_wstring, 1073741823, 0, self.parent.label)
+        self.Creator = self.RecordInfo.construct_record_creator()
 
         # Custom properties
-        self.RecordInfo: Sdk.RecordInfo = None
-        self.Creator: Sdk.RecordCreator = None
         self.EventField: Sdk.Field = None
-        self.LoopTask = None
+        self.Connection: pika.SelectConnection = None
+        self.Channel = None
+        self.Loop = None
 
     def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
         self.EventField = record_info_in.get_field_by_name('Event', throw_error=False)
         if self.EventField is None:
             self.parent.display_error_msg("Incoming data source must contain an 'Event' text field that pushes 'Start' and 'End' events")
             return False
-        self.RecordInfo = self._generate_output_record_info()
-        self.Creator = self.RecordInfo.construct_record_creator()
         self.parent.Output.init(self.RecordInfo)
+        self.Loop = asyncio.get_event_loop()
+        self.Connection = pika.BlockingConnection(pika.ConnectionParameters(host=self.parent.Host))
+        self.Channel = self.Connection.channel()
+        self.Channel.queue_declare(self.parent.Queue)
+        self.Channel.basic_consume(queue=self.parent.Queue, on_message_callback=self._push_event, auto_ack=True)
+        self.parent.display_info_msg("RabbitMQ connection created")
         return True
 
     def ii_push_record(self, in_record: Sdk.RecordRef) -> bool:
         self.parent.display_info_msg("received an event")
         event = self.EventField.get_as_string(in_record)
         if event != 'Start':
-            if self.LoopTask is not None:
-                self.LoopTask.cancel()
-                self.parent.display_info_msg("stopped event loop")
+            self.Connection.close()
+            self.parent.display_info_msg('stopped event loop')
             return True
-        event_loop = asyncio.get_event_loop()
-        self.LoopTask = event_loop.create_task(self._asyncPush())
-        threading.Thread(target=self.LoopTask).start()
+        self.Loop.run_in_executor(None, self.Channel.start_consuming)
         self.parent.display_info_msg("started event loop")
         return True
 
@@ -86,22 +93,13 @@ class IncomingInterface:
         self.parent.Output.assert_close()
         return
 
-    def _generate_output_record_info(self) -> Sdk.RecordInfo:
-        info: Sdk.RecordInfo = Sdk.RecordInfo(self.parent.alteryx_engine)
-        info.add_field("Count", Sdk.FieldType.int64, 0, 0, self.parent.label)
-        return info
-
-    async def _asyncPush(self):
-        count: int = 0
-
-        try:
-            while True:
-                await asyncio.sleep(self.parent.Seconds)
-                count += 1
-                self.Creator.reset()
-                self.RecordInfo.get_field_by_name('Count').set_from_int64(self.Creator, count)
-                data = self.Creator.finalize_record()
-                self.parent.Output.push_record(data)
-        except asyncio.CancelledError:
-            self.parent.display_info_msg("was cancelled")
-            return
+    def _push_event(self, ch, method, properties, body):
+        self.parent.display_info_msg('got event')
+        self.Creator.reset()
+        self.parent.display_info_msg('reset creator')
+        self.MessageField.set_from_string(self.Creator, body.decode("utf-8"))
+        self.parent.display_info_msg('set message field')
+        output = self.Creator.finalize_record()
+        self.parent.display_info_msg('finalized record')
+        self.parent.Output.push_record(output)
+        self.parent.display_info_msg('pushed record')
