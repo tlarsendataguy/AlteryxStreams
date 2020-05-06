@@ -12,6 +12,7 @@ mklink /D %streamerdir%\StreamerCalcTest %CD%\StreamerCalcTest
 mklink /D %streamerdir%\StreamerSample %CD%\StreamerSample
 mklink /D %streamerdir%\StreamerTimeInterval %CD%\StreamerTimeInterval
 mklink /D %streamerdir%\StreamerScan %CD%\StreamerScan
+mklink /D %streamerdir%\StreamerScanFromField %CD%\StreamerScanFromField
 mklink /D %streamerdir%\StreamerReduce %CD%\StreamerReduce
 mklink /D %streamerdir%\StreamerTwitter %CD%\StreamerTwitter
 mklink /D %streamerdir%\StreamerEventHubsIn %CD%\StreamerEventHubsIn
@@ -19,3 +20,4 @@ mklink /D %streamerdir%\StreamerEventHubsOut %CD%\StreamerEventHubsOut
 mklink /D %streamerdir%\StreamerBuffer %CD%\StreamerBuffer
 mklink /D %streamerdir%\StreamerRabbitMqIn %CD%\StreamerRabbitMqIn
 mklink /D %streamerdir%\StreamerRabbitMqOut %CD%\StreamerRabbitMqOut
+mklink /D %streamerdir%\StreamerEmitFile %CD%\StreamerEmitFile

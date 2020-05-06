@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<AlteryxJavaScriptPlugin>
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="..\StreamerCode\scan_from_field.py" SDKVersion="10.1" ToolFamily="AlteryxStreams" />
+  <GuiSettings Html="StreamerScanFromField.html" Icon="StreamerScanFromField.png" Help="" SDKVersion="10.1">
+    <InputConnections>
+      <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
+    </InputConnections>
+    <OutputConnections>
+      <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label=""/>
+    </OutputConnections>
+  </GuiSettings>
+  <Properties>
+    <MetaInfo>
+      <Name>Scan From Field</Name>
+      <Description>Apply a function from a field in each emitted record and emit the resulting value</Description>
+      <CategoryName>Streamer</CategoryName>
+      <SearchTags>python, sdk</SearchTags>
+      <ToolVersion>1.00</ToolVersion>
+      <Author>tlarsendataguy</Author>
+      <Company></Company>
+      <Copyright>2020</Copyright>
+    </MetaInfo>
+  </Properties>
+</AlteryxJavaScriptPlugin>

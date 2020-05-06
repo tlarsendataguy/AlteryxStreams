@@ -15,19 +15,19 @@ class AyxPlugin:
 
         # Custom properties
         self.Output: Sdk.OutputAnchor = None
-        self.Formula: str = ''
         self.FieldName: str = ''
         self.DataType: str = ''
         self.InitialValue: str = ''
         self.GroupByField: str = ''
+        self.FormulaField: str = ''
 
     def pi_init(self, str_xml: str):
-        self.Formula = Et.fromstring(str_xml).find("Formula").text if 'Formula' in str_xml else ''
         self.FieldName = Et.fromstring(str_xml).find("FieldName").text if 'FieldName' in str_xml else ''
         self.DataType = Et.fromstring(str_xml).find("DataType").text if 'DataType' in str_xml else ''
         self.InitialValue = Et.fromstring(str_xml).find("InitialValue").text if 'InitialValue' in str_xml else ''
         self.GroupByField = Et.fromstring(str_xml).find("GroupByField").text if 'GroupByField' in str_xml else ''
-        if self.Formula == '' or self.FieldName == '' or self.DataType == '' or self.InitialValue == '':
+        self.FormulaField = Et.fromstring(str_xml).find("FormulaField").text if 'FormulaField' in str_xml else ''
+        if self.FormulaField == '' or self.FieldName == '' or self.DataType == '' or self.InitialValue == '':
             self.display_error_msg('The field name, data type, formula, or initial value are blank.  All values must be provided.')
 
         # Getting the output anchor from Config.xml by the output connection name
@@ -67,12 +67,15 @@ class IncomingInterface:
         self.Visitor: FormulaVisitor = None
         self.CurrentValue = None
         self.CalcField: Sdk.Field = None
+        self.FormulaField: Sdk.Field = None
         self.GroupByField: Sdk.Field = None
         self.PriorGroupByValue = ''
         self.InitialValue = None
+        self.Formula = ''
 
     def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
         self.IncomingInfo = record_info_in
+        self.FormulaField = self.IncomingInfo.get_field_by_name(self.parent.FormulaField)
         if self.parent.GroupByField is not None and self.parent.GroupByField != '':
             self.GroupByField = self.IncomingInfo.get_field_by_name(self.parent.GroupByField)
         self.Info = self.IncomingInfo.clone()
@@ -104,7 +107,6 @@ class IncomingInterface:
             self.InitialValue = calculate(expression=self.parent.InitialValue, fields={})
             self.CurrentValue = self.InitialValue
             self.Fields[self.parent.FieldName] = lambda: self.CurrentValue
-            self.Visitor = FormulaVisitor(expression=self.parent.Formula, fields=self.Fields)
             return True
         except Exception as ex:
             self.parent.display_error_msg(str(ex))
@@ -123,6 +125,10 @@ class IncomingInterface:
         self.Creator.reset()
         self.Copier.copy(self.Creator, in_record)
         try:
+            formula = self.FormulaField.get_as_string(in_record)
+            if self.Formula != formula:
+                self.Visitor = FormulaVisitor(expression=formula, fields=self.Fields)
+                self.Formula = formula
             self.CurrentValue = self.Visitor.calculate()
 
             success = set_field(self.CalcField, self.Creator, self.CurrentValue)

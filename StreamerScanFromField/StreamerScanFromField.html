@@ -2,7 +2,7 @@
 <html style="padding:20px">
 <head>
   <meta charset="utf-8">
-  <title>Scan</title>
+  <title>Scan From Field</title>
   <style>
     @font-face {
       font-family: JetBrainsMono-Regular;
@@ -20,14 +20,14 @@
 <body>
   <form>
     <fieldset>
-      <legend class='blueTitle'>XMSG("Scan")</legend>
+      <legend class='blueTitle'>XMSG("Scan From Field")</legend>
       <div class=''>
         <label>XMSG("New Field Name:")</label>
 		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'FieldName', dataType: 'SimpleString'}"></ayx>
         <label>XMSG("Data Type:")</label>
 		<ayx data-ui-props="{type: 'DropDown'}" data-item-props="{dataName: 'DataType', dataType: 'StringSelector', optionList: [{value: 'String', label: 'String'},{value: 'Integer', label: 'Integer'},{value: 'Decimal', label: 'Decimal'},{value: 'Date', label: 'Date'},{value: 'Datetime', label: 'Datetime'}]}"></ayx>
         <label>XMSG("Formula:")</label>
-		<ayx data-ui-props="{type: 'TextArea', rows: 10}" data-item-props="{dataName: 'Formula', dataType: 'SimpleString'}"></ayx>
+		<ayx data-ui-props="{type: 'DropDown'}" data-item-props="{dataName: 'FormulaField', dataType: 'FieldSelector'}"></ayx>
         <label>XMSG("Initial Value:")</label>
 		<ayx data-ui-props="{type: 'TextBox'}" data-item-props="{dataName: 'InitialValue', dataType: 'SimpleString'}"></ayx>
         <label>XMSG("Reset to initial value when the following field changes:")</label>
