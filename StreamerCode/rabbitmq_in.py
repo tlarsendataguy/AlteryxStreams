@@ -94,12 +94,7 @@ class IncomingInterface:
         return
 
     def _push_event(self, ch, method, properties, body):
-        self.parent.display_info_msg('got event')
         self.Creator.reset()
-        self.parent.display_info_msg('reset creator')
         self.MessageField.set_from_string(self.Creator, body.decode("utf-8"))
-        self.parent.display_info_msg('set message field')
         output = self.Creator.finalize_record()
-        self.parent.display_info_msg('finalized record')
         self.parent.Output.push_record(output)
-        self.parent.display_info_msg('pushed record')

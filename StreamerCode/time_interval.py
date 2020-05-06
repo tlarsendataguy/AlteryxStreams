@@ -43,14 +43,22 @@ class IncomingInterface:
         self.parent: AyxPlugin = parent
 
         # Custom properties
+        self.IncomingInfo: Sdk.Record = None
         self.Info: Sdk.RecordInfo = None
+        self.IntervalField: Sdk.Field = None
         self.Creator: Sdk.RecordCreator = None
+        self.Copier: Sdk.RecordCopier = None
         self.LastTime: datetime.datetime = None
 
     def ii_init(self, record_info_in: Sdk.RecordInfo) -> bool:
-        self.Info = Sdk.RecordInfo(self.parent.alteryx_engine)
-        self.Info.add_field('Time Interval', Sdk.FieldType.int64, 8, 0)
+        self.IncomingInfo = record_info_in
+        self.Info = self.IncomingInfo.clone()
+        self.IntervalField = self.Info.add_field('Time Interval', Sdk.FieldType.int64, 8, 0)
         self.Creator = self.Info.construct_record_creator()
+        self.Copier = Sdk.RecordCopier(self.Info, self.IncomingInfo)
+        for i in range(self.IncomingInfo.num_fields):
+            self.Copier.add(i, i)
+        self.Copier.done_adding()
         self.parent.Output.init(self.Info)
         self.LastTime = datetime.datetime.now()
         return True
@@ -59,7 +67,8 @@ class IncomingInterface:
         now = datetime.datetime.now()
         delta = int((now - self.LastTime) / datetime.timedelta(milliseconds=1))
         self.Creator.reset()
-        self.Info[0].set_from_int64(self.Creator, delta)
+        self.Copier.copy(self.Creator, in_record)
+        self.IntervalField.set_from_int64(self.Creator, delta)
         output = self.Creator.finalize_record()
         self.parent.Output.push_record(output)
         self.LastTime = now
