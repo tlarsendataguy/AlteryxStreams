@@ -26,7 +26,7 @@ This and the related codebases contain experimental code to prove whether the id
 3. Run alteryx_streams_server.exe
 4. Download [the Avocado workflow](https://github.com/tlarsen7572/AlteryxStreams/releases/download/v0.1/Streamer.RabbitMQ.Eats.Avocados.yxmd)
 5. Run the Avocado workflow
-6. Open your browser and navigate to http://localhost:53014
+6. Open your browser and navigate to http://localhost:35014
 7. Type in any valid query and click 'Query Alteryx'.  The result should appear between the query and the button.  See the 'Things you should know about the Avocado query' section below.
 8. Conquer the Avocado industry
 
